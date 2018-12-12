@@ -1,4 +1,4 @@
-baseURL = "https://insecure.ucdavis.edu/"
+baseURL = "https://ucdavis.github.io/insecure"
 languageCode = "en-us"
 title = "Insecure@UC Davis"
 theme = "ananke"
