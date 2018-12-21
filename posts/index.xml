@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Insecure@UC Davis</title>
-    <link>https://ucdavis.github.io/insecure/posts/</link>
+    <link>https://insecure.ucdavis.edu/posts/</link>
     <description>Recent content in Posts on Insecure@UC Davis</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 11 Dec 2018 23:45:45 -0800</lastBuildDate>
     
-	<atom:link href="https://ucdavis.github.io/insecure/posts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://insecure.ucdavis.edu/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Setting Up OpenBSD 6.4</title>
-      <link>https://ucdavis.github.io/insecure/posts/setting-up-openbsd64/</link>
+      <link>https://insecure.ucdavis.edu/posts/setting-up-openbsd64/</link>
       <pubDate>Tue, 11 Dec 2018 23:45:45 -0800</pubDate>
       
-      <guid>https://ucdavis.github.io/insecure/posts/setting-up-openbsd64/</guid>
+      <guid>https://insecure.ucdavis.edu/posts/setting-up-openbsd64/</guid>
       <description>First, setup a USB install key:
 Rufus(Windows) https://rufus.ie/en_IE.html
 Etcher(MacOS)

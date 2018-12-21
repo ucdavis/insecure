@@ -3,29 +3,29 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://ucdavis.github.io/insecure/posts/setting-up-openbsd64/</loc>
+    <loc>https://insecure.ucdavis.edu/posts/setting-up-openbsd64/</loc>
     <lastmod>2018-12-11T23:45:45-08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ucdavis.github.io/insecure/categories/</loc>
+    <loc>https://insecure.ucdavis.edu/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://ucdavis.github.io/insecure/</loc>
-    <lastmod>2018-12-11T23:45:45-08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://ucdavis.github.io/insecure/posts/</loc>
+    <loc>https://insecure.ucdavis.edu/</loc>
     <lastmod>2018-12-11T23:45:45-08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://ucdavis.github.io/insecure/tags/</loc>
+    <loc>https://insecure.ucdavis.edu/posts/</loc>
+    <lastmod>2018-12-11T23:45:45-08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://insecure.ucdavis.edu/tags/</loc>
     <priority>0</priority>
   </url>
   
