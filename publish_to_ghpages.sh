@@ -1,10 +1,6 @@
 
 #!/bin/sh
 
-# DIR=$(dirname "$0")
-
-# cd $DIR/..
-
 if [[ $(git status -s) ]]
 then
     echo "The working directory is dirty. Please commit any pending changes."
@@ -29,5 +25,5 @@ hugo
 echo "Updating gh-pages branch"
 cd public
 echo insecure.ucdavis.edu >> CNAME
-git add --all && git commit -m "Publishing to gh-pages (publish.sh)"
+git add --all && git commit -m "Publishing to gh-pages (publish_to_ghpages.sh)"
 git push origin gh-pages
