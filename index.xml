@@ -17,7 +17,11 @@
       <pubDate>Tue, 11 Dec 2018 23:45:45 -0800</pubDate>
       
       <guid>https://ucdavis.github.io/insecure/posts/setting-up-openbsd64/</guid>
-      <description>First, setup a USB install key.</description>
+      <description>First, setup a USB install key:
+Rufus(Windows) https://rufus.ie/en_IE.html
+Etcher(MacOS)
+brew install balenaetcher  Pick the closest mirror to you to get the files. (I picked Sonic.net). The installation is the usual guided screens, you can safely use the defaults. I go back and forth between putting X on a firewall, I left it on because we might want to do nice graphic libraries which will require it.
+A couple of options I do.</description>
     </item>
     
   </channel>
