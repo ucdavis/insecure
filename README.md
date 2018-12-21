@@ -20,7 +20,7 @@ hugo new posts/my-first-post.md
 hugo server -D
 ~~~
 
-- Push changes when you're satisfied
+- Push changes when you're satisfied (don't forget to set `draft: false`)
 
 ~~~
 ./publish_to_ghpages.sh
