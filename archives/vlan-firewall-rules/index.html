@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Insecure@UC Davis  | Vlan Firewall Rules</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.52" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    
+    
+      <link href="/dist/css/app.955516233bcafa4d2a1c13cea63c7b50.css" rel="stylesheet">
+    
+
+    
+
+    
+      
+    
+
+    
+
+    <meta property="og:title" content="Vlan Firewall Rules" />
+<meta property="og:description" content="A sample ingress and egress ruleset for common campus services and ports.
+###################################################################### # VLAN ROUTING FIREWALL RULES # check in revisions with &#39;ci -l /etc/pf.conf&#39; # # DEFAULT POLICIES # block all inbound packets from outside # block all outbound packets from inside # # em0 is external interface # em1 is internal interface # # Note: pf uses &quot;skip steps&quot;, so rules should be ordered by: # 1) interface 2) protocol 3) source addr 4) source port # 5) dest addr 6) dest port # # REPLACE em0 and em1 with YOUR NIC DEVICES!" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://insecure.ucdavis.edu/archives/vlan-firewall-rules/" /><meta property="article:published_time" content="2007-09-13T09:44:45-08:00"/>
+<meta property="article:modified_time" content="2007-09-13T09:44:45-08:00"/>
+
+<meta itemprop="name" content="Vlan Firewall Rules">
+<meta itemprop="description" content="A sample ingress and egress ruleset for common campus services and ports.
+###################################################################### # VLAN ROUTING FIREWALL RULES # check in revisions with &#39;ci -l /etc/pf.conf&#39; # # DEFAULT POLICIES # block all inbound packets from outside # block all outbound packets from inside # # em0 is external interface # em1 is internal interface # # Note: pf uses &quot;skip steps&quot;, so rules should be ordered by: # 1) interface 2) protocol 3) source addr 4) source port # 5) dest addr 6) dest port # # REPLACE em0 and em1 with YOUR NIC DEVICES!">
+
+
+<meta itemprop="datePublished" content="2007-09-13T09:44:45-08:00" />
+<meta itemprop="dateModified" content="2007-09-13T09:44:45-08:00" />
+<meta itemprop="wordCount" content="2565">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Vlan Firewall Rules"/>
+<meta name="twitter:description" content="A sample ingress and egress ruleset for common campus services and ports.
+###################################################################### # VLAN ROUTING FIREWALL RULES # check in revisions with &#39;ci -l /etc/pf.conf&#39; # # DEFAULT POLICIES # block all inbound packets from outside # block all outbound packets from inside # # em0 is external interface # em1 is internal interface # # Note: pf uses &quot;skip steps&quot;, so rules should be ordered by: # 1) interface 2) protocol 3) source addr 4) source port # 5) dest addr 6) dest port # # REPLACE em0 and em1 with YOUR NIC DEVICES!"/>
+
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="https://insecure.ucdavis.edu" class="f3 fw2 hover-white no-underline white-90 dib">
+      Insecure@UC Davis
+    </a>
+    <div class="flex-l items-center">
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/about/" title="About page">
+              About
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/archives/" title="Archives page">
+              Archives
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/posts/" title="Posts page">
+              Posts
+            </a>
+          </li>
+          
+        </ul>
+      
+      
+<div hidden>
+  <span id="new-window-0">Opens in a new window</span>
+  <span id="new-window-1">Opens an external site</span>
+  <span id="new-window-2">Opens an external site in a new window</span>
+</div>
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3 ph0-l">
+
+    <header class="mt4 w-100">
+      <p class="f6 b helvetica tracked">
+          
+        ARCHIVES
+      </p>
+      <h1 class="f1 athelas mb1">Vlan Firewall Rules</h1>
+      
+      <time class="f6 mv4 dib tracked" datetime="2007-09-13T09:44:45-08:00">September 13, 2007</time>      
+      
+      
+        <span class="f6 mv4 dib tracked"> - 13 minutes read</span>
+        <span class="f6 mv4 dib tracked"> - 2565 words</span>
+      
+    </header>
+
+    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><p>A sample ingress and egress ruleset for common campus services and ports.</p>
+
+<pre><code>######################################################################
+# VLAN ROUTING FIREWALL RULES
+# check in revisions with 'ci -l /etc/pf.conf'
+#
+# DEFAULT POLICIES
+# block all inbound packets from outside
+# block all outbound packets from inside
+#
+# em0 is external interface
+# em1 is internal interface
+#
+# Note: pf uses &quot;skip steps&quot;, so rules should be ordered by:
+# 1) interface 2) protocol 3) source addr 4) source port
+# 5) dest addr 6) dest port
+#
+#       REPLACE em0 and em1 with YOUR NIC DEVICES!
+#
+#    REPLACE &quot;.abc.&quot; WITH YOUR SUBNET!
+#
+
+# Interfaces
+ext_if = &quot;em0&quot;
+int_if = &quot;em1&quot;
+
+###########
+# Department Specific Hosts
+###########
+
+# Department subnet(s)
+department1 = &quot;169.237.abc.0/24&quot;
+aesdean = &quot;169.237.124.0/24&quot;
+
+# Domain Controllers
+dc1 = &quot;169.237.abc.1&quot;
+dc2 = &quot;169.237.abc.2&quot;
+table &lt;dcs&gt; { $dc1 $dc2 }
+
+# Mail servers
+exchange = &quot;169.237.abc.4&quot;
+
+# Public webservers
+www1 = &quot;169.237.abc.6&quot;
+www2 = &quot;169.237.abc.3&quot;
+www3 = &quot;169.237.abc.246&quot;
+www4 = &quot;169.237.abc.247&quot;
+www5 = &quot;169.237.abc.249&quot;
+www6 = &quot;169.237.abc.233&quot;
+table &lt;pub_web&gt; { $www1 $www2 $www3 $www4 $www5 $www6 $exchange }
+
+# Secure FTP servers
+sftp1 = &quot;169.237.abc.6&quot;
+sftp2 = &quot;169.237.abc.5&quot;
+table &lt;sftp&gt; { $sftp1 $sftp2 }
+
+#VPN server
+vpn = &quot;169.237.abc.2&quot;
+vpn_port = &quot;1723&quot;
+
+# RDP
+rdp_port = &quot;3389&quot;
+
+# PPS Printers enabled for direct printing
+table &lt;pps_printers&gt; { 169.237.abc.1 }
+
+# Banner Printers enabled for direct printing
+table &lt;banner_printers&gt; { 169.237.abc.1 }
+
+# Departmental iChat server
+my_ichatserver = &quot;169.237.abc.ichatsrv&quot;
+
+### Definitions
+#
+# 5060 udp iChat AV Session Initialization Protocol (SIP)
+# 5190 tcp/udp iChat/AIM - file transfer 5190
+# 5222 tcp ichat Jabber server,
+# 5223 tcp ichat server SSL
+# 5269 tcp iChat server-to-server
+# 7777 tcp iChat server file transfer proxy
+# 16384-16404 udp iChat AV Realtime Transport Protocol, Realtime Control Protocol
+ichat = &quot;5060, 5190, 5222, 5223, 5269, 7777, 16384:16404&quot;
+
+# it looks like snatmap is used to map the visible IP address of a machine
+# that sits behind a NAT router so it can get a chat connection
+snatmap = &quot;17.250.248.149&quot; # snatmap.mac.com
+
+###########
+# Generic Campus Hosts
+###########
+
+# Campus DNS servers
+dns = &quot;{ 169.237.250.250 169.237.1.250 }&quot;
+
+# Campus Scanners
+table &lt;campusscanners&gt; { 169.237.105.111 169.237.105.112 169.237.246.3 \
+        169.237.246.4 169.237.246.5 169.237.246.6 }
+
+# Banner
+ica_tcp = &quot;1494&quot;
+ica_udp = &quot;1604&quot;
+banner7_prod_port = &quot;1525&quot;
+print_ports = &quot;{&quot; 515 9100 &quot;}&quot;
+#print_ports_snmp = &quot;{&quot; 161 162 &quot;}&quot;
+
+banner1 = &quot;169.237.224.131&quot;
+banner2 = &quot;169.237.224.132&quot;
+banner3 = &quot;169.237.224.133&quot;
+banner4 = &quot;169.237.224.134&quot;
+banner5 = &quot;169.237.224.135&quot;
+banner6 = &quot;169.237.224.136&quot;
+banner7 = &quot;169.237.224.137&quot;
+banner8 = &quot;169.237.224.138&quot;
+banner9 = &quot;169.237.224.139&quot;
+banner10 = &quot;169.237.224.140&quot;
+table &lt;banner&gt; { $banner1 $banner2 $banner3 $banner4 \
+        $banner5 $banner6 $banner7 $banner8 $banner9 \
+        $banner10 }
+table &lt;banner_print_servers&gt;  { 169.237.104.59 169.237.104.62 \
+        169.237.104.63 128.120.38.64 128.120.38.72 }
+confluence = &quot;confluence.ucdavis.edu&quot;
+
+banner_web_sites = &quot;{&quot; $confluence &quot;}&quot;
+
+# AIS
+ais1 = &quot;dillon.ucdavis.edu&quot;
+ais2 = &quot;catalina.ucdavis.edu&quot;
+ais3 = &quot;pebble.ucdavis.edu&quot;
+ais = &quot;{&quot; $ais1 $ais2 $ais3 &quot;}&quot;
+
+# DaFIS
+afs1 = &quot;afs1.ucdavis.edu&quot;
+afs2 = &quot;afs2.ucdavis.edu&quot;
+afs3 = &quot;afs3.ucdavis.edu&quot;
+afsadmin4 = &quot;afsadmin4.ucdavis.edu&quot;
+afsadmin5 = &quot;afsadmin5.ucdavis.edu&quot;
+afsadmin6 = &quot;afsadmin6.ucdavis.edu&quot;
+afsadmin7 = &quot;afsadmin7.ucdavis.edu&quot;
+dafis = &quot;{&quot; $afs1 $afs2 $afs3 $afsadmin4 \
+        $afsadmin5 $afsadmin6 $afsadmin7 &quot;}&quot;
+
+# DaFIS Monitor
+afsmon1 = &quot;169.237.59.25&quot;
+afsmon2 = &quot;169.237.59.26&quot;
+afsmon3 = &quot;169.237.59.27&quot;
+table &lt;dafismon&gt; { $afsmon1 $afsmon2 $afsmon3 }
+
+# DaFIS AFS Proxy Servers
+afsp1 = &quot;169.237.105.130&quot;
+afsp2 = &quot;169.237.105.131&quot;
+afsp3 = &quot;169.237.105.132&quot;
+afsp4 = &quot;169.237.105.133&quot;
+table &lt;dafisp&gt; { $afsp1 $afsp2 $afsp3 $afsp4 }
+
+# DaFIS Database Servers
+afsd1 = &quot;169.237.59.20&quot;
+afsd2 = &quot;169.237.59.38&quot;
+table &lt;dafisd&gt; { $afsd1 $afsd2 }
+
+# DaFIS DNS
+#afsdns1 = &quot;169.237.104.103&quot;
+#afsdns2 = &quot;169.237.105.108&quot;
+afsdns1 = &quot;128.120.32.98&quot;
+afsdns2 = &quot;128.120.32.99&quot;
+table &lt;dafisdns&gt; { $afsdns1 $afsdns2 }
+
+# Oracle
+oraport = &quot;1521&quot;
+tnsport = &quot;1522&quot;
+calosoma = &quot;calosoma.ucdavis.edu&quot;
+fisdss = &quot;fis-dss.ucdavis.edu&quot;
+zeus = &quot;zeus.ucdavis.edu&quot;
+aedes = &quot;aedes.ucdavis.edu&quot;
+oranames1 = &quot;oranames1.ucdavis.edu&quot;
+oranames2 = &quot;oranames2.ucdavis.edu&quot;
+bahn = &quot;bahn.ucdavis.edu&quot;
+oracle = &quot;{&quot; $calosoma $fisdss $zeus $aedes $bahn &quot;}&quot;
+
+# PPS
+pps_port = &quot;515&quot;
+pps1 = &quot;128.48.178.6&quot;
+pps2 = &quot;128.48.96.57&quot;
+pps3 = &quot;128.48.96.51&quot;
+pps4 = &quot;128.48.96.64&quot;
+table &lt;pps&gt; { $pps1 $pps2 $pps3 $pps4 }
+
+# LDAP Campus
+ldap1 = &quot;169.237.104.189&quot;
+table &lt;ldap&gt; { $ldap1 }
+
+# Campus KMS
+kms = &quot;vista.ucdavis.edu&quot;
+
+# Tables
+table &lt;badhosts&gt; persist file &quot;/etc/badhosts&quot;
+table &lt;private&gt; const { 10/8, 172.16/12, 192.168/16 }
+table &lt;campus&gt; const { 169.237/16, 128.120/16, 152.79/16 }
+
+###########
+# Logging, Timeouts, Limits, Interface skips, Scrubs, FTP Proxy
+###########
+
+# Setup logging interface
+set loginterface $ext_if
+
+# Revised - Adaptive Set higher state limits
+set timeout { adaptive.start 10000, adaptive.end 110000 }
+set limit states 100000
+set timeout interval 10
+
+# Don't filter on loopback interface
+set skip on lo
+
+# Normalize all incoming/outgoing traffic to prevent malformed packets
+scrub in on $ext_if all random-id fragment reassemble
+scrub out on $ext_if all random-id fragment reassemble
+
+# FTP-Proxy
+nat-anchor &quot;ftp-proxy/*&quot;
+rdr-anchor &quot;ftp-proxy/*&quot;
+rdr on $int_if proto tcp from any to any port 21 -&gt; 127.0.0.1 \
+        port 8021
+
+# Don't filter on internal interface
+pass in on $int_if all
+pass out on $int_if all
+
+###########
+# Default Block Rules
+###########
+
+# Default deny all traffic
+block  in log on $ext_if all label &quot;Default block in&quot;
+block out log on $ext_if all label &quot;Default block out&quot;
+
+# Default block in IPv6 traffic for unpatched
+block in quick inet6 label &quot;Default block in IPv6&quot;
+
+# Block spoofed traffic and bad hosts
+block  in log quick on $ext_if from &lt;badhosts&gt; \
+    label &quot;Badhosts in&quot;
+block out log quick on $ext_if to &lt;badhosts&gt; \
+        label &quot;Badhosts out&quot;
+block  in log quick on $ext_if from &lt;private&gt; \
+        label &quot;Private in&quot;
+block out log quick on $ext_if to &lt;private&gt; \
+        label &quot;Private out&quot;
+
+#Block Campus Scanners for quick Kerberos/distauth login
+block return in from &lt;campusscanners&gt; label &quot;Block Campus Scanners&quot;
+
+# Reject auth connections for fast SMTP handshake
+block return-rst in proto tcp to any port auth \
+        label &quot;Reject auth for SMTP&quot;
+
+###########
+# Ingress Rules
+###########
+
+########### General Rules [Ingress] ###########
+
+# Allow ICMP (ping, neterrors, traceroute)
+pass in on $ext_if inet proto icmp icmp-type 8 \
+        code 0 label &quot;ICMP in&quot;
+
+########### Campus Systems [Ingress] ###########
+
+# Banner Printing
+pass in on $ext_if proto tcp from &lt;banner_print_servers&gt; to \
+    &lt;banner_printers&gt; port $print_ports \
+    modulate state \
+    label &quot;Banner printing $dstport in&quot;
+
+# Banner SNMP Print Config, uncomment if remote print config is needed
+#pass in quick on $ext_if proto udp from &lt;banner_print_servers&gt; to \
+#       &lt;banner_printers&gt; port $print_ports_snmp \
+#       keep state \
+#    label &quot;Banner SNMP Print Config&quot;
+
+# PPS
+pass in on $ext_if proto tcp from &lt;pps&gt; to any \
+    port $pps_port \
+    modulate state \
+    label &quot;PPS Printing $srcaddr in&quot;
+pass in on $ext_if proto tcp from &lt;pps&gt; to &lt;pps_printers&gt; \
+    port $print_ports \
+    modulate state \
+    label &quot;PPS Printing $srcaddr in&quot;
+
+########### Department Specific Rules [Ingress] ###########
+
+# pass in to DNS servers (DCs)
+pass in on $ext_if proto udp from any to &lt;dcs&gt; \
+    port domain \
+        modulate state \
+        label &quot;dns in to DCs&quot;
+
+# pass in ssh from Dean's Office
+pass in log on $ext_if proto tcp from $aesdean to ($ext_if) \
+    port ssh \
+        modulate state \
+        label &quot;ssh in&quot;
+
+# Allow http/s requests to public web servers
+pass in on $ext_if proto tcp from any to &lt;pub_web&gt; \
+        port { http https } \
+        modulate state \
+        label &quot;Public Web $dstaddr:$dstport in&quot;
+
+# Allow mail into to Exchange server
+pass in on $ext_if proto tcp to $exchange \
+    port smtp \
+        modulate state \
+        label &quot;SMTP $dstaddr:$dstport in&quot;
+
+#Pass inbound traffic to VPN
+pass in on $ext_if proto tcp to $vpn \
+    port $vpn_port \
+    flags S/SA modulate state \
+        label &quot;VPN in&quot;
+pass in on $ext_if proto gre to $vpn \
+    label &quot;VPN in&quot;
+
+# Allow iChat in
+pass in on $ext_if proto { tcp, udp } from any to $my_ichatserver \
+    port { $ichat  } \
+    flags S/SA modulate state \
+    label &quot;iChat $dstaddr:$dstport in&quot;
+
+###########
+# Egress Rules
+###########
+
+########### General Rules [Egress] ###########
+
+# ICMP (ping, neterrors, traceroute) out
+pass out on $ext_if inet proto icmp all icmp-type 8 code 0 \
+    label &quot;ICMP out&quot;
+
+# DNS out
+pass out on $ext_if proto udp to any \
+    port { domain } \
+    modulate state \
+    label &quot;dns out&quot;
+
+# NTP out
+pass out on $ext_if proto udp to any \
+    port ntp \
+    modulate state \
+    label &quot;$dstport out&quot;
+
+# HTTP(S) out
+pass out on $ext_if proto tcp to any \
+    port { http https } \
+    flags S/SA modulate state \
+    label &quot;web $dstport out&quot;
+
+# SMTP/POP(S)/IMAP(S) out
+pass out on $ext_if proto tcp to any \
+    port { smtp 587 imap imaps pop3 pop3s } \
+    flags S/SA modulate state \
+    label &quot;email $dstport out&quot;
+
+# RDP out
+pass out on $ext_if proto tcp to any \
+    port $rdp_port \
+    flags S/SA modulate state \
+    label &quot;RDP $dstport out&quot;
+
+# VPN out
+pass out on $ext_if proto tcp from $vpn to any \
+    port $vpn_port \
+    flags S/SA modulate state \
+    label &quot;VPN out&quot;
+pass out on $ext_if proto gre from $vpn \
+    label &quot;VPN out&quot;
+
+# FTP-Proxy out
+anchor &quot;ftp-proxy/*&quot;
+pass out proto tcp from localhost to any \
+    port 21 \
+    keep state \
+        label &quot;ftp-proxy out $dstport&quot;
+
+# FTP out
+pass out on $ext_if proto tcp to any \
+    port ftp \
+    flags S/SA modulate state \
+    label &quot;ftp $dstport out&quot;
+
+# Kerberos out
+pass out on $ext_if proto { tcp, udp } to any \
+    port kerberos \
+    flags S/SA modulate state \
+    label &quot;Kerberos $dstport out&quot;
+
+# Telnet/SSH out
+pass out on $ext_if proto tcp to any \
+    port { ssh telnet } \
+    flags S/SA modulate state \
+    label &quot;ssh/telnet $dstport out&quot;
+
+# NNTP out
+pass out on $ext_if proto tcp from $department1 to any \
+    port { 119 563 } \
+    modulate state \
+    label &quot;NNTP $dstport out&quot;
+
+# LDAP out
+pass out on $ext_if proto tcp from $department1 to any \
+    port { ldap ldaps } \
+    modulate state \
+    label &quot;LDAP $dstport out&quot;
+
+# CVS Update for OpenBSD out
+pass out on $ext_if proto tcp from $department1 to any \
+    port 5999 \
+    modulate state \
+    label &quot;CVS Update out&quot;
+
+# WHOIS out (e.g. whois -h directory.ucdavis.edu getchell )
+pass out on $ext_if proto tcp from any to any \
+        port 43 \
+        modulate state \
+        label &quot;WHOIS $dstport out&quot;
+
+########### Campus Systems [Egress] ###########
+
+# AIS
+pass out on $ext_if proto tcp to $ais \
+    port $ica_tcp \
+    flags S/SA modulate state \
+    label &quot;AIS $dstaddr:$dstport out&quot;
+pass out on $ext_if proto udp to $ais \
+    port $ica_udp \
+    keep state \
+    label &quot;AIS  $dstaddr:$dstport out&quot;
+
+# Banner
+pass out on $ext_if proto tcp to &lt;banner&gt; \
+    port $ica_tcp \
+    flags S/SA modulate state \
+    label &quot;Banner/DESII $dstport TCP out&quot;
+pass out on $ext_if proto udp to &lt;banner&gt; \
+    port $ica_udp \
+    keep state \
+    label &quot;Banner/DESII $dstport UDP out&quot;
+pass out on $ext_if proto tcp to &lt;banner_print_servers&gt; \
+    port $banner7_prod_port \
+    modulate state \
+    label &quot;Banner third-party DB access out&quot;
+
+# Banner production
+pass out on $ext_if proto tcp to $zeus \
+    port $banner7_prod_port \
+    modulate state \
+    label &quot;Banner $dstaddr:$dstport out&quot;
+
+# Banner web site out
+pass out on $ext_if proto tcp from $department1 to sis.ucdavis.edu \
+    port { 4443 } \
+    modulate state \
+    label &quot;Banner Web site out&quot;
+
+# UCD Sites on 8443: MyInfoVault, etc.
+pass out on $ext_if proto tcp from $department1 to any \
+    port { 8443 } \
+    modulate state \
+    label &quot;UCD Secure site on 8443 out&quot;
+
+# Online Provision System
+pass out on $ext_if proto tcp from $department1 to escalante.ucdavis.edu \
+    port 7777 \
+    modulate state \
+    label &quot;Web sites on port $dstport out&quot;
+
+# DaFIS
+pass out on $ext_if proto udp to $dafis  \
+    keep state \
+        (udp.multiple 2700, adaptive.start 6000, adaptive.end 12000) \
+        label &quot;DaFIS AFS $dstaddr out&quot;
+# DaFIS Monitor
+pass out on $ext_if proto tcp to &lt;dafismon&gt;  \
+    keep state \
+        (adaptive.start 6000, adaptive.end 12000) \
+        label &quot;DaFIS $dstaddr:$dstport out&quot;
+# DaFIS Proxy
+pass out on $ext_if proto tcp to &lt;dafisp&gt; \
+    port { 139 445 } \
+        modulate state \
+        label &quot;DaFIS $dstaddr:$dstport out&quot;
+# DaFIS Database Servers
+pass out on $ext_if proto tcp to &lt;dafisd&gt; \
+    port 1521 \
+        modulate state \
+        label &quot;DaFIS $dstaddr:$dstport out&quot;
+# DaFIS Oracle DNS
+pass out on $ext_if proto tcp to &lt;dafisdns&gt; \
+    port 1522 \
+    modulate state \
+    label &quot;DaFIS $dstaddr:$dstport out&quot;
+
+# Campus Oracle
+# TNS Names
+pass out on $ext_if proto tcp to $oracle \
+    port $oraport \
+    flags S/SA modulate state \
+        label &quot;DaFIS $dstaddr:$dstport out&quot;
+pass out on $ext_if proto tcp to { $oranames1 $oranames2 $zeus }\
+        port $tnsport \
+        flags S/SA modulate state \
+        label &quot;DaFIS $dstaddr:$dstport out&quot;
+
+# PPS
+pass out on $ext_if proto tcp to &lt;pps&gt; \
+    flags S/SA modulate state \
+    label &quot;PPS-&gt;$dstaddr&quot;
+
+# Vista activation
+pass out on $ext_if proto tcp to $kms \
+        port 1688 \
+        flags S/SA modulate state \
+        label &quot;MS activation $dstaddr:$dstport out&quot;
+
+# UCOP academic site
+pass out on $ext_if proto tcp from $department1 \
+         to accept.ucop.edu port { 4430 8131 } \
+         label &quot;AcceptUCOP-&gt;$dstaddr&quot;
+
+########### Department Specific [Egress] ###########
+
+# AIM/IRC
+pass out on $ext_if proto tcp from $department1 to any \
+    port { 5190 5222 6667 } \
+    modulate state \
+    label &quot;AIM $dstport out&quot;
+
+# Non-standard web site ports
+pass out on $ext_if proto tcp from $department1 to any \
+    port { 4443 8080 } \
+    modulate state \
+    label &quot;Non-standard Web $dstport out&quot;
+
+# Windows Media player
+pass out on $ext_if proto tcp from $department1 to any \
+    port { 1755 554 } \
+    modulate state \
+    label &quot;Windows Media player $dstport out&quot;
+
+# Breeze out
+pass out on $ext_if proto tcp from any to any \
+    port 1935 \
+        flags S/SA modulate state \
+        label &quot;Breeze out&quot;
+
+# MatLab
+pass out on $ext_if proto tcp to any \
+    port { 2013 2015 7241 32910 } \
+    flags S/SA modulate state \
+    label &quot;MatLab out&quot;
+
+# SciFinder Scholar
+pass out on $ext_if proto tcp to any \
+    port 210 \
+        flags S/SA modulate state \
+        label &quot;SciFinder out&quot;
+
+# eJournals out
+pass out on $ext_if proto tcp from any to ucelinks.cdlib.org \
+    port 8888 \
+        flags S/SA modulate state \
+        label &quot;eJournals port $dstport out&quot;
+pass out on $ext_if proto tcp from any to sfx.lib.ucdavis.edu \
+    port 9003 \
+        flags S/SA modulate state \
+        label &quot;eJournals port $dstport out&quot;
+pass out on $ext_if proto tcp from any to request.cdlib.org \
+    port 8082 \
+        flags S/SA modulate state \
+        label &quot;eJournals port $dstport out&quot;
+
+# iTunes radio
+# Apple tech docs claim a restricted range of ports are used
+# but in practice various internet radio stations unfortunately
+# use different port numbers outside the documented range.
+# The following rule gets about half the stations I looked at
+# and all the stations I happened to care about.
+
+pass out on $ext_if proto tcp from any to any \
+        port 8000:8999 keep state \
+        label &quot;iTunes radio out&quot;
+
+# iChat
+pass out on $ext_if proto { tcp, udp } from any to any \
+    port { $ichat } \
+    flags S/SA modulate state \
+    label &quot;iChat to $dstport out&quot;
+
+# snatmap out (used for iChat AV to clients behind NAT )
+pass out on $ext_if proto udp from any to $snatmap \
+    keep state \
+    label &quot;snatmap $dstport out&quot;
+
+# AIM/IRC
+pass out on $ext_if proto { tcp, udp } from any port { $ichat } to any \
+    flags S/SA modulate state \
+    label &quot;iChat from $srcport out&quot;
+</code></pre>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6">
+        
+      </div>
+    </main>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://insecure.ucdavis.edu" >
+    &copy; 2018 Insecure@UC Davis
+  </a>
+    <div>
+<div hidden>
+  <span id="new-window-0">Opens in a new window</span>
+  <span id="new-window-1">Opens an external site</span>
+  <span id="new-window-2">Opens an external site in a new window</span>
+</div>
+
+
+
+
+
+
+
+
+</div>
+  </div>
+</footer>
+
+    
+
+  <script src="/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+  </body>
+</html>

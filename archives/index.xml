@@ -23,5 +23,15 @@ Download ftp://ftp.openbsd.org/pub/OpenBSD/4.0/tools/ntrw.exe Download ftp://ftp
 ntrw floppy40.fs a:  Install OpenBSD: Insert CD/floppy in machine on which you want to install OpenBSD and boot system from the disk. If you&amp;rsquo;re using a system with no removable drives, attach and boot from a USB drive.</description>
     </item>
     
+    <item>
+      <title>Vlan Firewall Rules</title>
+      <link>https://insecure.ucdavis.edu/archives/vlan-firewall-rules/</link>
+      <pubDate>Thu, 13 Sep 2007 09:44:45 -0800</pubDate>
+      
+      <guid>https://insecure.ucdavis.edu/archives/vlan-firewall-rules/</guid>
+      <description>A sample ingress and egress ruleset for common campus services and ports.
+###################################################################### # VLAN ROUTING FIREWALL RULES # check in revisions with &#39;ci -l /etc/pf.conf&#39; # # DEFAULT POLICIES # block all inbound packets from outside # block all outbound packets from inside # # em0 is external interface # em1 is internal interface # # Note: pf uses &amp;quot;skip steps&amp;quot;, so rules should be ordered by: # 1) interface 2) protocol 3) source addr 4) source port # 5) dest addr 6) dest port # # REPLACE em0 and em1 with YOUR NIC DEVICES!</description>
+    </item>
+    
   </channel>
 </rss>
