@@ -2,3 +2,12 @@ baseURL = "https://insecure.ucdavis.edu"
 languageCode = "en-us"
 title = "Insecure@UC Davis"
 theme = "ananke"
+
+SectionPagesMenu = "main"
+Paginate = 5
+enableRobotsTXT = true
+
+[sitemap]
+  changefreq = "monthly"
+  priority = 0.5
+  filename = "sitemap.xml"
