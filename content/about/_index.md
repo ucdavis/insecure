@@ -5,4 +5,4 @@ draft: false
 ---
 Welcome to Insecure.ucdavis.edu!
 
-This is the fifth(!) iteration!
+This is the fifth(!) iteration static site on GitHub.
