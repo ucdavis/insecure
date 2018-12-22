@@ -1,28 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Insecure@UC Davis</title>
-    <link>https://insecure.ucdavis.edu/</link>
-    <description>Recent content on Insecure@UC Davis</description>
+    <title>Archives on Insecure@UC Davis</title>
+    <link>https://insecure.ucdavis.edu/archives/</link>
+    <description>Recent content in Archives on Insecure@UC Davis</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 11 Dec 2018 23:45:45 -0800</lastBuildDate>
+    <lastBuildDate>Sun, 11 Dec 2011 09:16:54 -0800</lastBuildDate>
     
-	<atom:link href="https://insecure.ucdavis.edu/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://insecure.ucdavis.edu/archives/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Setting Up OpenBSD 6.4</title>
-      <link>https://insecure.ucdavis.edu/posts/setting-up-openbsd64/</link>
-      <pubDate>Tue, 11 Dec 2018 23:45:45 -0800</pubDate>
-      
-      <guid>https://insecure.ucdavis.edu/posts/setting-up-openbsd64/</guid>
-      <description>First, setup a USB install key:
-Rufus(Windows) https://rufus.ie/en_IE.html
-Etcher(MacOS)
-brew install balenaetcher  Pick the closest mirror to you to get the files. (I picked Sonic.net). The installation is the usual guided screens, you can safely use the defaults. I go back and forth between putting X on a firewall, I left it on because we might want to do nice graphic libraries which will require it.
-A couple of options I do recommend:</description>
-    </item>
     
     <item>
       <title>Openbsd 4 Firewall</title>

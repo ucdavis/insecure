@@ -17,6 +17,20 @@
   </url>
   
   <url>
+    <loc>https://insecure.ucdavis.edu/archives/openbsd-4-firewall/</loc>
+    <lastmod>2011-12-11T09:16:54-08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://insecure.ucdavis.edu/archives/</loc>
+    <lastmod>2011-12-11T09:16:54-08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://insecure.ucdavis.edu/categories/</loc>
     <changefreq>monthly</changefreq>
     <priority>0</priority>
