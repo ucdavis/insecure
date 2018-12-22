@@ -7,6 +7,9 @@ SectionPagesMenu = "main"
 Paginate = 5
 enableRobotsTXT = true
 
+[params]
+  show_reading_time = true
+
 [sitemap]
   changefreq = "monthly"
   priority = 0.5
