@@ -5,7 +5,9 @@ draft: false
 ---
 Welcome to Insecure.ucdavis.edu!
 
-This is the fourth(!) iteration; now it's a static site on GitHub.
+This is the fourth(!) iteration.
 
-We'll bring back content from the old site eventually, but it's out of date
+Content from the old site is in Archives, but it's out of date
 and mostly a historical curiosity.
+
+New stuff will appear in Posts.
