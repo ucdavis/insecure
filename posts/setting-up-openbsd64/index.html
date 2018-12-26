@@ -9,7 +9,7 @@
     <meta name="MobileOptimized" content="320">
 
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.52" />
+    <meta name="generator" content="Hugo 0.53" />
     
     
       <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
@@ -29,37 +29,40 @@
     
 
     <meta property="og:title" content="Setting Up OpenBSD 6.4" />
-<meta property="og:description" content="First, setup a USB install key:
-Rufus(Windows) https://rufus.ie/en_IE.html
-Etcher(MacOS)
-brew install balenaetcher  Pick the closest mirror to you to get the files. (I picked Sonic.net). The installation is the usual guided screens, you can safely use the defaults. I go back and forth between putting X on a firewall, I left it on because we might want to do nice graphic libraries which will require it.
-A couple of options I do recommend:" />
+<meta property="og:description" content="Prerequisites First, setup a USB install key:
+Windows Rufus
+MacOS Etcher
+brew install balenaetcher  Note: If you aren&rsquo;t familiar with Homebrew, definitely familiarize yourself with it!
+Initial install Boot from USB, changing boot order as needed. You should see a screen like the following:
+Pick the closest mirror to you to get the files. (I picked Sonic.net). The installation is the usual guided screens, you can safely use the defaults." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://insecure.ucdavis.edu/posts/setting-up-openbsd64/" /><meta property="article:published_time" content="2018-12-11T23:45:45-08:00"/>
 <meta property="article:modified_time" content="2018-12-11T23:45:45-08:00"/>
 
 <meta itemprop="name" content="Setting Up OpenBSD 6.4">
-<meta itemprop="description" content="First, setup a USB install key:
-Rufus(Windows) https://rufus.ie/en_IE.html
-Etcher(MacOS)
-brew install balenaetcher  Pick the closest mirror to you to get the files. (I picked Sonic.net). The installation is the usual guided screens, you can safely use the defaults. I go back and forth between putting X on a firewall, I left it on because we might want to do nice graphic libraries which will require it.
-A couple of options I do recommend:">
+<meta itemprop="description" content="Prerequisites First, setup a USB install key:
+Windows Rufus
+MacOS Etcher
+brew install balenaetcher  Note: If you aren&rsquo;t familiar with Homebrew, definitely familiarize yourself with it!
+Initial install Boot from USB, changing boot order as needed. You should see a screen like the following:
+Pick the closest mirror to you to get the files. (I picked Sonic.net). The installation is the usual guided screens, you can safely use the defaults.">
 
 
 <meta itemprop="datePublished" content="2018-12-11T23:45:45-08:00" />
 <meta itemprop="dateModified" content="2018-12-11T23:45:45-08:00" />
-<meta itemprop="wordCount" content="73">
+<meta itemprop="wordCount" content="105">
 
 
 
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Setting Up OpenBSD 6.4"/>
-<meta name="twitter:description" content="First, setup a USB install key:
-Rufus(Windows) https://rufus.ie/en_IE.html
-Etcher(MacOS)
-brew install balenaetcher  Pick the closest mirror to you to get the files. (I picked Sonic.net). The installation is the usual guided screens, you can safely use the defaults. I go back and forth between putting X on a firewall, I left it on because we might want to do nice graphic libraries which will require it.
-A couple of options I do recommend:"/>
+<meta name="twitter:description" content="Prerequisites First, setup a USB install key:
+Windows Rufus
+MacOS Etcher
+brew install balenaetcher  Note: If you aren&rsquo;t familiar with Homebrew, definitely familiarize yourself with it!
+Initial install Boot from USB, changing boot order as needed. You should see a screen like the following:
+Pick the closest mirror to you to get the files. (I picked Sonic.net). The installation is the usual guided screens, you can safely use the defaults."/>
 
   </head>
 
@@ -140,19 +143,34 @@ A couple of options I do recommend:"/>
       
       
         <span class="f6 mv4 dib tracked"> - 1 minutes read</span>
-        <span class="f6 mv4 dib tracked"> - 73 words</span>
+        <span class="f6 mv4 dib tracked"> - 105 words</span>
       
     </header>
 
-    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><p>First, setup a USB install key:</p>
+    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
 
-<p>Rufus(Windows)
-<a href="https://rufus.ie/en_IE.html">https://rufus.ie/en_IE.html</a></p>
+<h2 id="prerequisites">Prerequisites</h2>
 
-<p>Etcher(MacOS)</p>
+<p>First, setup a USB install key:</p>
+
+<h3 id="windows">Windows</h3>
+
+<p><a href="https://rufus.ie/en_IE.html">Rufus</a></p>
+
+<h3 id="macos">MacOS</h3>
+
+<p><a href="https://www.balena.io/etcher/">Etcher</a></p>
 
 <pre><code>brew install balenaetcher
 </code></pre>
+
+<p>Note: If you aren&rsquo;t familiar with <a href="https://brew.sh">Homebrew</a>, definitely familiarize yourself
+with it!</p>
+
+<h2 id="initial-install">Initial install</h2>
+
+<p>Boot from USB, changing boot order as needed. You should see a screen like
+the following:</p>
 
 <p>Pick the closest mirror to you to get the files. (I picked Sonic.net).
 The installation is the usual guided screens, you can safely use the defaults.
