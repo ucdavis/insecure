@@ -22,7 +22,8 @@ Windows Rufus
 MacOS Etcher
 brew install balenaetcher  Note: If you aren&amp;rsquo;t familiar with Homebrew, definitely familiarize yourself with it!
 Initial install Boot from USB, changing boot order as needed. You should see a screen like the following:
-Pick the closest mirror to you to get the files. (I picked Sonic.net). The installation is the usual guided screens, you can safely use the defaults.</description>
+  OpenBSD 6.4 Setup screen
+  Pick the closest mirror to you to get the files. (I picked Sonic.net). The installation is the usual guided screens, you can safely use the defaults.</description>
     </item>
     
   </channel>
