@@ -27,7 +27,7 @@ with it!
 Boot from USB, changing boot order as needed. You should see a screen like
 the following:
 
-
+{{< figure src="/images/setup.png" caption="OpenBSD 6.4 Setup screen" >}}
 
 Pick the closest mirror to you to get the files. (I picked Sonic.net).
 The installation is the usual guided screens, you can safely use the defaults.
