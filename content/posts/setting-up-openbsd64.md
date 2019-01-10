@@ -36,6 +36,8 @@ we might want to do nice graphic libraries which will require it.
 
 A couple of options I *do* recommend:
 
+Blah blah blah
+
 [Rufus]: https://rufus.ie/en_IE.html
 [Etcher]: https://www.balena.io/etcher/
 [Homebrew]: https://brew.sh
