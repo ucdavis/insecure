@@ -6,7 +6,7 @@
     <description>Recent content on Insecure@UC Davis</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 11 Dec 2018 23:45:45 -0800</lastBuildDate>
+    <lastBuildDate>Tue, 15 Jan 2019 14:50:45 -0800</lastBuildDate>
     
 	<atom:link href="https://insecure.ucdavis.edu/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>Setting Up OpenBSD 6.4</title>
       <link>https://insecure.ucdavis.edu/posts/setting-up-openbsd64/</link>
-      <pubDate>Tue, 11 Dec 2018 23:45:45 -0800</pubDate>
+      <pubDate>Tue, 15 Jan 2019 14:50:45 -0800</pubDate>
       
       <guid>https://insecure.ucdavis.edu/posts/setting-up-openbsd64/</guid>
       <description>Prerequisites First, setup a USB install key:

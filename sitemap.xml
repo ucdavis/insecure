@@ -3,15 +3,15 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://insecure.ucdavis.edu/about/</loc>
-    <lastmod>2018-12-21T14:18:02-08:00</lastmod>
+    <loc>https://insecure.ucdavis.edu/posts/setting-up-openbsd64/</loc>
+    <lastmod>2019-01-15T14:50:45-08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://insecure.ucdavis.edu/posts/setting-up-openbsd64/</loc>
-    <lastmod>2018-12-11T23:45:45-08:00</lastmod>
+    <loc>https://insecure.ucdavis.edu/about/</loc>
+    <lastmod>2018-12-21T14:18:02-08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -45,14 +45,14 @@
   
   <url>
     <loc>https://insecure.ucdavis.edu/</loc>
-    <lastmod>2018-12-11T23:45:45-08:00</lastmod>
+    <lastmod>2019-01-15T14:50:45-08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://insecure.ucdavis.edu/posts/</loc>
-    <lastmod>2018-12-11T23:45:45-08:00</lastmod>
+    <lastmod>2019-01-15T14:50:45-08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0</priority>
   </url>
