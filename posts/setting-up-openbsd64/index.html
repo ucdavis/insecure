@@ -52,7 +52,7 @@ Initial install Boot from USB, changing boot order as needed. You should see a s
 
 <meta itemprop="datePublished" content="2019-01-15T14:50:45-08:00" />
 <meta itemprop="dateModified" content="2019-01-15T14:50:45-08:00" />
-<meta itemprop="wordCount" content="279">
+<meta itemprop="wordCount" content="286">
 
 
 
@@ -146,7 +146,7 @@ Initial install Boot from USB, changing boot order as needed. You should see a s
       
       
         <span class="f6 mv4 dib tracked"> - 2 minutes read</span>
-        <span class="f6 mv4 dib tracked"> - 279 words</span>
+        <span class="f6 mv4 dib tracked"> - 286 words</span>
       
     </header>
 
@@ -243,6 +243,9 @@ doas make install
 <pre><code>cd /usr/src
 doas make obj
 doas make build
+doas sysmerge
+cd /dev
+doas ./MAKEDEV all
 </code></pre>
 <ul class="pa0">
   
