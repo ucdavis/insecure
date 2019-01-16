@@ -52,7 +52,7 @@ Initial install Boot from USB, changing boot order as needed. You should see a s
 
 <meta itemprop="datePublished" content="2019-01-15T14:50:45-08:00" />
 <meta itemprop="dateModified" content="2019-01-15T14:50:45-08:00" />
-<meta itemprop="wordCount" content="286">
+<meta itemprop="wordCount" content="394">
 
 
 
@@ -146,7 +146,7 @@ Initial install Boot from USB, changing boot order as needed. You should see a s
       
       
         <span class="f6 mv4 dib tracked"> - 2 minutes read</span>
-        <span class="f6 mv4 dib tracked"> - 286 words</span>
+        <span class="f6 mv4 dib tracked"> - 394 words</span>
       
     </header>
 
@@ -225,7 +225,8 @@ doas chmod 755 xenocara ports
 cvs -qd anoncvs@anoncvs1.usa.openbsd.org:/cvs checkout -rOPENBSD_6_4 -P src
 </code></pre>
 
-<p>This is fetching from the mirror at Bend, Oregon, and will take awhile.</p>
+<p>This example is fetching from the mirror at Bend, Oregon, and will take awhile.
+Use the closest mirror.</p>
 
 <h4 id="build-and-install-a-new-kernel">Build and install a new kernel</h4>
 
@@ -236,7 +237,8 @@ doas make
 doas make install
 </code></pre>
 
-<p>The current kernel is in <code>/obsd</code> and the new kernel is <code>/bsd</code>. Reboot.</p>
+<p>The current kernel is copied to <code>/obsd</code> and the new kernel is <code>/bsd</code>. Reboot.
+If you have a kernel panic, <a href="https://man.openbsd.org/boot.8">boot</a> the old kernel and try again.</p>
 
 <h4 id="build-and-update-a-new-base-system">Build and update a new base system</h4>
 
@@ -247,6 +249,26 @@ doas sysmerge
 cd /dev
 doas ./MAKEDEV all
 </code></pre>
+
+<p>This will take a few hours. Building OpenBSD from source is a good hardware
+burn-in test. If you are getting <a href="https://www.bitwizard.nl/sig11/">Signal 11</a> errors, your firewall hardware is
+not ready for production.</p>
+
+<h4 id="building-x">Building X</h4>
+
+<p>Since we specified X11 packages on the initial install, we&rsquo;ll need to update
+Xenocara, OpenBSD&rsquo;s meta-build for <a href="https://www.x.org/wiki/">X.Org</a>. Note that you will need at least
+4GB on <code>/usr</code>!</p>
+
+<pre><code>cd /usr
+doas cvs -qd anoncvs@anoncvs1.usa.openbsd.org:/cvs checkout -rOPENBSD_6_4 -P xenocara
+cd /usr/xenocara
+doas make bootstrap
+doas make obj
+doas make build
+</code></pre>
+
+<p>This will take another couple of hours.</p>
 <ul class="pa0">
   
 </ul>
