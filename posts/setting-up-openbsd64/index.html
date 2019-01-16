@@ -52,7 +52,7 @@ Initial install Boot from USB, changing boot order as needed. You should see a s
 
 <meta itemprop="datePublished" content="2019-01-15T14:50:45-08:00" />
 <meta itemprop="dateModified" content="2019-01-15T14:50:45-08:00" />
-<meta itemprop="wordCount" content="232">
+<meta itemprop="wordCount" content="279">
 
 
 
@@ -146,7 +146,7 @@ Initial install Boot from USB, changing boot order as needed. You should see a s
       
       
         <span class="f6 mv4 dib tracked"> - 2 minutes read</span>
-        <span class="f6 mv4 dib tracked"> - 232 words</span>
+        <span class="f6 mv4 dib tracked"> - 279 words</span>
       
     </header>
 
@@ -226,6 +226,24 @@ cvs -qd anoncvs@anoncvs1.usa.openbsd.org:/cvs checkout -rOPENBSD_6_4 -P src
 </code></pre>
 
 <p>This is fetching from the mirror at Bend, Oregon, and will take awhile.</p>
+
+<h4 id="build-and-install-a-new-kernel">Build and install a new kernel</h4>
+
+<pre><code>cd /sys/arch/$(machine)/compile/GENERIC.MP
+doas make obj
+doas make config
+doas make
+doas make install
+</code></pre>
+
+<p>The current kernel is in <code>/obsd</code> and the new kernel is <code>/bsd</code>. Reboot.</p>
+
+<h4 id="build-and-update-a-new-base-system">Build and update a new base system</h4>
+
+<pre><code>cd /usr/src
+doas make obj
+doas make build
+</code></pre>
 <ul class="pa0">
   
 </ul>
