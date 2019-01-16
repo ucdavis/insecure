@@ -72,7 +72,25 @@ cvs -qd anoncvs@anoncvs1.usa.openbsd.org:/cvs checkout -rOPENBSD_6_4 -P src
 ```
 This is fetching from the mirror at Bend, Oregon, and will take awhile.
 
+#### Build and install a new kernel
 
+```
+cd /sys/arch/$(machine)/compile/GENERIC.MP
+doas make obj
+doas make config
+doas make
+doas make install
+```
+
+The current kernel is in `/obsd` and the new kernel is `/bsd`. Reboot.
+
+#### Build and update a new base system
+
+```
+cd /usr/src
+doas make obj
+doas make build
+```
 
 [Rufus]: https://rufus.ie/en_IE.html
 [Etcher]: https://www.balena.io/etcher/
