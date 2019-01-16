@@ -70,7 +70,8 @@ Now fetch `-stable`:
 cd /usr
 cvs -qd anoncvs@anoncvs1.usa.openbsd.org:/cvs checkout -rOPENBSD_6_4 -P src
 ```
-This is fetching from the mirror at Bend, Oregon, and will take awhile.
+This example is fetching from the mirror at Bend, Oregon, and will take awhile.
+Use the closest mirror.
 
 #### Build and install a new kernel
 
@@ -82,7 +83,8 @@ doas make
 doas make install
 ```
 
-The current kernel is in `/obsd` and the new kernel is `/bsd`. Reboot.
+The current kernel is copied to `/obsd` and the new kernel is `/bsd`. Reboot.
+If you have a kernel panic, [boot] the old kernel and try again.
 
 #### Build and update a new base system
 
@@ -94,6 +96,25 @@ doas sysmerge
 cd /dev
 doas ./MAKEDEV all
 ```
+This will take a few hours. Building OpenBSD from source is a good hardware
+burn-in test. If you are getting [Signal 11] errors, your firewall hardware is
+not ready for production.
+
+#### Building X
+
+Since we specified X11 packages on the initial install, we'll need to update
+Xenocara, OpenBSD's meta-build for [X.Org]. Note that you will need at least
+4GB on `/usr`!
+
+```
+cd /usr
+doas cvs -qd anoncvs@anoncvs1.usa.openbsd.org:/cvs checkout -rOPENBSD_6_4 -P xenocara
+cd /usr/xenocara
+doas make bootstrap
+doas make obj
+doas make build
+```
+This will take another couple of hours.
 
 [Rufus]: https://rufus.ie/en_IE.html
 [Etcher]: https://www.balena.io/etcher/
@@ -101,3 +122,6 @@ doas ./MAKEDEV all
 [doas]: https://man.openbsd.org/doas
 [Updating]: https://www.openbsd.org/faq/faq5.html
 [xenocara]: https://github.com/openbsd/xenocara
+[X.org]: https://www.x.org/wiki/
+[Signal 11]: https://www.bitwizard.nl/sig11/
+[boot]: https://man.openbsd.org/boot.8
