@@ -90,6 +90,9 @@ The current kernel is in `/obsd` and the new kernel is `/bsd`. Reboot.
 cd /usr/src
 doas make obj
 doas make build
+doas sysmerge
+cd /dev
+doas ./MAKEDEV all
 ```
 
 [Rufus]: https://rufus.ie/en_IE.html
