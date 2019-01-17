@@ -52,7 +52,7 @@ Initial install Boot from USB, changing boot order as needed. You should see a s
 
 <meta itemprop="datePublished" content="2019-01-15T14:50:45-08:00" />
 <meta itemprop="dateModified" content="2019-01-15T14:50:45-08:00" />
-<meta itemprop="wordCount" content="394">
+<meta itemprop="wordCount" content="694">
 
 
 
@@ -145,8 +145,8 @@ Initial install Boot from USB, changing boot order as needed. You should see a s
       <time class="f6 mv4 dib tracked" datetime="2019-01-15T14:50:45-08:00">January 15, 2019</time>      
       
       
-        <span class="f6 mv4 dib tracked"> - 2 minutes read</span>
-        <span class="f6 mv4 dib tracked"> - 394 words</span>
+        <span class="f6 mv4 dib tracked"> - 4 minutes read</span>
+        <span class="f6 mv4 dib tracked"> - 694 words</span>
       
     </header>
 
@@ -269,6 +269,54 @@ doas make build
 </code></pre>
 
 <p>This will take another couple of hours.</p>
+
+<h2 id="configure-routing-firewall-for-a-vlan">Configure routing firewall for a VLAN:</h2>
+
+<p>In order to protect your VLAN using a <a href="https://www.openbsd.org/faq/pf/example1.html">routing</a> firewall, you&rsquo;ll need to first get a subnet configured by the NOC to run all of your VLAN traffic through two NAMs. You&rsquo;ll connect both NAMs to the routing firewall. One will be the external interface and will have a new subnet and subnet mask. The other will be the internal interface and will be configured as the gateway for your current subnet.</p>
+
+<p>The following section assumes the following:</p>
+
+<ol>
+<li>The public side of your firewall sits on subnet 169.237.efg.0/24 and the mask for that subnet is 255.255.255.0.</li>
+<li>The NIC on the public side of the firewall will have the ip address 169.237.efg.hij</li>
+<li>The up-level router in subnet 169.237.efg.0 has IP address 169.237.efg.klm.</li>
+<li>The clients on the private side of your subnet use 169.237.abc.254 as their gateway.</li>
+<li>The NICs on your firewall are ext0 and int1. Type &lsquo;ifconfig -a&rsquo; to find out their real names.</li>
+</ol>
+
+<p>Try Paul Waterstraat&rsquo;s VLAN routing firewall configuration tool <a href="http://computing.geology.ucdavis.edu/security/openbsd_routing_firewall-worksheet.php">here</a></p>
+
+<p>Start out by deleting the external interface:</p>
+
+<pre><code># ifconfig ext0 delete
+</code></pre>
+
+<p>If you configured the second NIC delete it as well:</p>
+
+<pre><code># ifconfig int1 delete
+</code></pre>
+
+<p>This is the IP in the new subnet NOC gave you:</p>
+
+<pre><code># echo 'inet 169.237.efg.hij 255.255.255.252 NONE' &gt; /etc/hostname.ext0
+</code></pre>
+
+<p>This is in your current subnet. This address will be the gateway for your clients:</p>
+
+<pre><code># echo 'inet 169.237.abc.254 255.255.255.0 NONE' &gt; /etc/hostname.int1
+</code></pre>
+
+<p>This is the gateway for your OpenBSD router. It&rsquo;s a NOC router on the same subnet as ext0&rsquo;s ip address:</p>
+
+<pre><code># echo '169.237.efg.klm ' &gt; /etc/mygate
+</code></pre>
+
+<p>After rebooting your computer will begin using the IP addresses configured above. To avoid conflicting addresses you should either turn off other computers with these IP addresses or you should unplug this firewall from the network.</p>
+
+<p>Reboot:</p>
+
+<pre><code># reboot
+</code></pre>
 <ul class="pa0">
   
 </ul>
