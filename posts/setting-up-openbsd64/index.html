@@ -52,7 +52,7 @@ Initial install Boot from USB, changing boot order as needed. You should see a s
 
 <meta itemprop="datePublished" content="2019-01-15T14:50:45-08:00" />
 <meta itemprop="dateModified" content="2019-01-15T14:50:45-08:00" />
-<meta itemprop="wordCount" content="694">
+<meta itemprop="wordCount" content="707">
 
 
 
@@ -146,7 +146,7 @@ Initial install Boot from USB, changing boot order as needed. You should see a s
       
       
         <span class="f6 mv4 dib tracked"> - 4 minutes read</span>
-        <span class="f6 mv4 dib tracked"> - 694 words</span>
+        <span class="f6 mv4 dib tracked"> - 707 words</span>
       
     </header>
 
@@ -286,7 +286,17 @@ doas make build
 
 <p>Try Paul Waterstraat&rsquo;s VLAN routing firewall configuration tool <a href="http://computing.geology.ucdavis.edu/security/openbsd_routing_firewall-worksheet.php">here</a></p>
 
-<p>Start out by deleting the external interface:</p>
+<p>First, configure IP forwarding:</p>
+
+<pre><code>doas vi /etc/sysctl.conf
+</code></pre>
+
+<p>The contents of this file should be:</p>
+
+<pre><code>net.inet.ip.forwarding=1
+</code></pre>
+
+<p>Next, delete the external interface:</p>
 
 <pre><code># ifconfig ext0 delete
 </code></pre>
