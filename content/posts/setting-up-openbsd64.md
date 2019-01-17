@@ -130,7 +130,15 @@ The following section assumes the following:
 
 Try Paul Waterstraat's VLAN routing firewall configuration tool [here][PaulGeoTool]
 
-Start out by deleting the external interface:
+First, configure IP forwarding:
+```
+doas vi /etc/sysctl.conf
+```
+The contents of this file should be:
+```
+net.inet.ip.forwarding=1
+```
+Next, delete the external interface:
 ```
 # ifconfig ext0 delete
 ```
