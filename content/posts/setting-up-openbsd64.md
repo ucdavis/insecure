@@ -116,6 +116,53 @@ doas make build
 ```
 This will take another couple of hours.
 
+## Configure routing firewall for a VLAN:
+
+In order to protect your VLAN using a [routing] firewall, you'll need to first get a subnet configured by the NOC to run all of your VLAN traffic through two NAMs. You'll connect both NAMs to the routing firewall. One will be the external interface and will have a new subnet and subnet mask. The other will be the internal interface and will be configured as the gateway for your current subnet.
+
+The following section assumes the following:
+
+1. The public side of your firewall sits on subnet 169.237.efg.0/24 and the mask for that subnet is 255.255.255.0.
+2. The NIC on the public side of the firewall will have the ip address 169.237.efg.hij
+3. The up-level router in subnet 169.237.efg.0 has IP address 169.237.efg.klm.
+4. The clients on the private side of your subnet use 169.237.abc.254 as their gateway.
+5. The NICs on your firewall are ext0 and int1. Type 'ifconfig -a' to find out their real names.
+
+Try Paul Waterstraat's VLAN routing firewall configuration tool [here][PaulGeoTool]
+
+Start out by deleting the external interface:
+```
+# ifconfig ext0 delete
+```
+
+If you configured the second NIC delete it as well:
+```
+# ifconfig int1 delete
+```
+
+This is the IP in the new subnet NOC gave you:
+```
+# echo 'inet 169.237.efg.hij 255.255.255.252 NONE' > /etc/hostname.ext0
+```
+
+This is in your current subnet. This address will be the gateway for your clients:
+```
+# echo 'inet 169.237.abc.254 255.255.255.0 NONE' > /etc/hostname.int1
+```
+
+This is the gateway for your OpenBSD router. It's a NOC router on the same subnet as ext0's ip address:
+```
+# echo '169.237.efg.klm ' > /etc/mygate
+```
+
+After rebooting your computer will begin using the IP addresses configured above. To avoid conflicting addresses you should either turn off other computers with these IP addresses or you should unplug this firewall from the network.
+
+Reboot:
+```
+# reboot
+```
+
+
 [Rufus]: https://rufus.ie/en_IE.html
 [Etcher]: https://www.balena.io/etcher/
 [Homebrew]: https://brew.sh
@@ -125,3 +172,5 @@ This will take another couple of hours.
 [X.org]: https://www.x.org/wiki/
 [Signal 11]: https://www.bitwizard.nl/sig11/
 [boot]: https://man.openbsd.org/boot.8
+[routing]: https://www.openbsd.org/faq/pf/example1.html
+[PaulGeoTool]: http://computing.geology.ucdavis.edu/security/openbsd_routing_firewall-worksheet.php
